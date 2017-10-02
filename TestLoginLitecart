@@ -1,0 +1,24 @@
+import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class TestLoginLitecart {
+
+   @Test
+    public void testLogin() {
+        WebDriver driver = new ChromeDriver();
+        driver.get("http://localhost/litecart/admin/login.php");
+        WebElement user = driver.findElement(By.xpath("//input[@class='form-control' AND @name='username']"));
+        WebElement pass = driver.findElement(By.xpath("//input[@class='form-control' And @name='password']"));
+        WebElement login = driver.findElement(By.xpath("//button[@class='btn btn-default' AND @name='login'"));
+
+user.sendKeys("admin");
+pass.sendKeys("admin");
+login.click();
+       driver.quit();
+
+
+    }
+}
