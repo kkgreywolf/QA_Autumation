@@ -1,0 +1,58 @@
+package pages;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+import utils.DriverFactory;
+
+import java.util.List;
+
+public class AdminPanelPage {
+    @FindBy(id = "box-apps-menu")
+    WebElement sideMenuContainer;
+
+    @FindBy(className = "docs")
+    WebElement inMenuContainer;
+
+    public AdminPanelPage() {
+        PageFactory.initElements(DriverFactory.getDriver(), this);
+    }
+
+    public boolean isHeaderPresent() {
+        return isElementPresent(By.tagName("h1"));
+    }
+
+    private boolean isElementPresent(By locator) {
+        return DriverFactory.getDriver().findElements(locator).isEmpty();
+
+    }
+
+    private List<WebElement> getSideMenuContainer() {
+
+        return sideMenuContainer.findElements(By.id("app-"));
+    }
+
+    private List<WebElement> getInMenuContainer() {
+        return inMenuContainer.findElements(By.tagName("li"));
+    }
+
+    public void checkThatMenuLinksContainHeader() {
+        int side = getSideMenuContainer().size();
+        WebElement sideMenu;
+        for (int i = 0; i < side; i++) {
+            sideMenu = getSideMenuContainer().get(i);
+            sideMenu.click();
+            if (isElementPresent(By.className("docs"))) {
+                int inside = getInMenuContainer().size();
+               System.out.println(inside);
+                for (int j = 0; j < inside; j++) {
+                    WebElement inMenu;
+                    inMenu = getInMenuContainer().get(j);
+                    inMenu.click();
+
+                }
+            }
+        }
+    }
+}
