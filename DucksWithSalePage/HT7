@@ -1,1 +1,29 @@
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+import utils.DriverFactory;
+
+import java.util.List;
+
+public class DucksWithSalePage {
+    @FindBy(className = "tab-content")
+            WebElement imgDucksWithSale;
+
+    private List<WebElement> getImgDucksWithSale() {
+        return imgDucksWithSale.findElements(By.xpath("//*[@class= 'sticker sale']"));
+    }
+
+    public DucksWithSalePage() {
+        PageFactory.initElements(DriverFactory.getDriver(), this);
+    }
+
+    public boolean listDucksWithStikersIsNotEmpty() {
+        return !getImgDucksWithSale().isEmpty();
+
+    }
+    public int countDucksWithStikers(){
+        return getImgDucksWithSale().size();
+    }
+}
 
